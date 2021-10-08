@@ -1,7 +1,11 @@
+%let name=livskv11;
+%let gpath=https://raw.githubusercontent.com/KarlBangChristensen/statistikbanken/main;
+filename gh url "&gpath/&name.%20data.sas";
+%include gh;
 *;
 %let path=C:\Users\karlc\Desktop\statistikbanken;
+%let path=C:\Users\pzs913;
 %let name=livskv11;
-%include "&path\&name\&name data.sas";
 libname &name "&path\&name";
 proc copy in=work out=&name memtype=data;
 	select codes codes_with_formats formats values;
@@ -40,14 +44,11 @@ run;
 proc sort data=table;
 	by V5;
 run;
-/*
 options printerpath=gif animation=start animduration=1 animloop=no noanimoverlay;
 ods printer file="&path\livskv11.gif";
 ods graphics / height=500px width=800px;
-*/
 options nobyline;
 title ;
-
 %macro plot(item, label);
 	title "&label";
 	proc sgpanel data=table;
@@ -55,19 +56,15 @@ title ;
 		panelby V3 / columns=1 rows=6 noheader;
 		hbar RegSj / response=pct_col stat=mean group=V4;
 		keylegend / title=' ' noborder;
-	*	colaxis valueattrs=(size=14) label=' ';
-	*	rowaxis display=(novalues noline noticks) labelattrs=(size=14) label='aldersgrupper';
+		colaxis valueattrs=(size=14) label=' ';
+		rowaxis display=(/*novalues*/ noline noticks) labelattrs=(size=14) label='aldersgrupper';
 	run;
 %mend plot;
-%plot(item=S33, label= I hvilken grad føler du dig værdsat og anerkendt af andre i din hverdag? );
-%plot(item=S34, label= I hvilken grad føler du, at du har mulighed for at styre dit liv i den retning, du selv ønsker? 
-%plot(item=S35, label= I hvilken grad mener du, at folk generelt er til at stole på? 
-%plot(item=S36, label= I hvilken grad føler du dig tryg i dit nærområde efter mørkets frembrud? 
-%plot(item=S37, label= I hvilken grad har du tillid til, at politiet vil hjælpe dig, hvis du har brug for det? 
-%plot(item=S38, label=I hvilken grad synes du, at hærværk og kriminalitet er et problem i dit nærområde? 
-
+%plot(item=S33, label=I hvilken grad fÃ¸ler du dig vÃ¦rdsat og anerkendt af andre i din hverdag?);
+%plot(item=S34, label=I hvilken grad fÃ¸ler du at du har mulighed for at styre dit liv i den retning du selv Ã¸nsker?);
+%plot(item=S35, label=I hvilken grad mener du, at folk generelt er til at stole pÃ¥?);
+%plot(item=S36, label=I hvilken grad fÃ¸ler du dig tryg i dit nÃ¦romrÃ¥de efter mÃ¸rkets frembrud?);
+%plot(item=S37, label=I hvilken grad har du tillid til at politiet vil hjÃ¸lpe dig hvis du har brug for det?);
+%plot(item=S38, label=I hvilken grad synes du, at hÃ¦rvÃ¦rk og kriminalitet er et problem i dit nÃ¦romrÃ¥de?);
 ods printer close;
 
-proc print data=formats noobs;
-var start label;
-run;
