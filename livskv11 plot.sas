@@ -62,9 +62,9 @@ title ;
 %mend plot;
 %plot(item=S33, label=I hvilken grad føler du dig værdsat og anerkendt af andre i din hverdag?);
 %plot(item=S34, label=I hvilken grad føler du at du har mulighed for at styre dit liv i den retning du selv ønsker?);
-%plot(item=S35, label=I hvilken grad mener du, at folk generelt er til at stole på?);
+%plot(item=S35, label=I hvilken grad mener du at folk generelt er til at stole på?);
 %plot(item=S36, label=I hvilken grad føler du dig tryg i dit nærområde efter mørkets frembrud?);
 %plot(item=S37, label=I hvilken grad har du tillid til at politiet vil hjølpe dig hvis du har brug for det?);
-%plot(item=S38, label=I hvilken grad synes du, at hærværk og kriminalitet er et problem i dit nærområde?);
+%plot(item=S38, label=I hvilken grad synes du at hærværk og kriminalitet er et problem i dit nærområde?);
 ods printer close;
 
